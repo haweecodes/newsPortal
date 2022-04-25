@@ -14,7 +14,7 @@
 
 <script>
 export default {
-  name: "HeadlineBox",
+  name: 'HeadlineBox',
 };
 </script>
 

@@ -1,4 +1,4 @@
-const headlineApi = 'top-headlines?country=us'
-const sourceApi = 'sources'
+const headlineApi = 'top-headlines?country=us';
+const sourceApi = 'sources';
 
-export {headlineApi,sourceApi}
+export { headlineApi, sourceApi };

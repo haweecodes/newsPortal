@@ -37,10 +37,10 @@
 
 <script>
 export default {
-  name: "HeadlineEditModal",
-  props: ["open", "onHeadlineChange", "onModalClose"],
+  name: 'HeadlineEditModal',
+  props: ['open', 'onHeadlineChange', 'onModalClose'],
   data: () => ({
-    newHeadlineTitle: "",
+    newHeadlineTitle: '',
   }),
   computed: {
     checkHeadlineLength() {
@@ -49,10 +49,10 @@ export default {
   },
   methods: {
     editHeadlineTitle() {
-      this.$emit("onHeadlineChange", this.newHeadlineTitle);
+      this.$emit('onHeadlineChange', this.newHeadlineTitle);
     },
     closeModal() {
-      this.$emit("onModalClose");
+      this.$emit('onModalClose');
     },
   },
 };

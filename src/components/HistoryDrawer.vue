@@ -22,10 +22,11 @@
 </template>
 
 <script>
-import { getHistoryFromLocalStorage } from "../utils/helper";
+import { getHistoryFromLocalStorage } from '../utils/helper';
+
 export default {
-  name: "HistoryDrawer",
-  props: ["drawer"],
+  name: 'HistoryDrawer',
+  props: ['drawer'],
   data: () => ({
     historyList: [],
   }),

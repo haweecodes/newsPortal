@@ -49,7 +49,9 @@
                 </template>
                 <template v-slot:HeadlineContent>
                   {{ headline.description }}
-                  <span @click="redirectToOriginalPage(headline)" class="link read-more"
+                  <span
+                    @click="redirectToOriginalPage(headline)"
+                    class="link read-more"
                     >Read more...</span
                   >
                 </template>
@@ -66,7 +68,13 @@
 
       <HistoryDrawer v-if="drawer" :drawer="drawer" />
 
-      <v-speed-dial fixed bottom right open-on-hover transition="slide-y-reverse-transition">
+      <v-speed-dial
+        fixed
+        bottom
+        right
+        open-on-hover
+        transition="slide-y-reverse-transition"
+      >
         <template v-slot:activator>
           <v-btn color="blue darken-2" dark fab>
             <v-icon> mdi-apps </v-icon>
@@ -100,15 +108,15 @@
 </template>
 
 <script>
-import HeadlineBox from "@/components/HeadlineBox.vue";
-import SearchAndFilter from "@/components/SearchAndFilter.vue";
-import HeadlineEditModal from "@/components/HeadlineEditModal.vue";
-import LoaderWrapper from "@/components/LoaderWrapper.vue";
-import HistoryDrawer from "@/components/HistoryDrawer.vue";
-import { setHistoryToLocalStorage } from "@/utils/helper";
+import HeadlineBox from '@/components/HeadlineBox.vue';
+import SearchAndFilter from '@/components/SearchAndFilter.vue';
+import HeadlineEditModal from '@/components/HeadlineEditModal.vue';
+import LoaderWrapper from '@/components/LoaderWrapper.vue';
+import HistoryDrawer from '@/components/HistoryDrawer.vue';
+import { setHistoryToLocalStorage } from '@/utils/helper';
 
 export default {
-  name: "Home",
+  name: 'Home',
   components: {
     HeadlineBox,
     SearchAndFilter,
@@ -119,20 +127,20 @@ export default {
   data: () => ({
     loading: true,
     showModal: false,
-    currentHeadline: "",
-    editedHeadline: "",
+    currentHeadline: '',
+    editedHeadline: '',
     editableHeadlineIndex: null,
-    errorMessage: "",
-    showAlert: "",
+    errorMessage: '',
+    showAlert: '',
     drawer: false,
     historyList: [],
   }),
   computed: {
-    getLoadingState: function () {
+    getLoadingState() {
       return this.$store.state.loading;
     },
-    getHeadlineList: function () {
-      const sourceFilter = this.$store.state.sourceFilter;
+    getHeadlineList() {
+      const { sourceFilter } = this.$store.state;
       return this.$store.state.newsHeadlineList.filter((headline) => {
         if (sourceFilter) return headline.source.id === sourceFilter;
 
@@ -142,19 +150,19 @@ export default {
   },
   beforeMount() {
     if (this.$store.state.newsHeadlineList.length < 1) {
-      this.$store.commit("setLoadingState", true);
-      this.$store.dispatch("fetchHeadlineList");
+      this.$store.commit('setLoadingState', true);
+      this.$store.dispatch('fetchHeadlineList');
     }
   },
   methods: {
     redirectToDetailPage(headline) {
-      this.$store.commit("setViewHeadlineDetail", headline);
-      this.$router.push("/detail");
+      this.$store.commit('setViewHeadlineDetail', headline);
+      this.$router.push('/detail');
       setHistoryToLocalStorage(headline);
     },
     redirectToOriginalPage(headline) {
       setHistoryToLocalStorage(headline);
-      window.open(headline.url, "_blank");
+      window.open(headline.url, '_blank');
     },
     editHeadline(headline, index) {
       this.editableHeadlineIndex = index;
@@ -162,7 +170,7 @@ export default {
       this.toogleModal();
     },
     async onHeadlineChange(title) {
-      this.$store.commit("editViewHeadline", {
+      this.$store.commit('editViewHeadline', {
         title,
         index: this.editableHeadlineIndex,
       });
@@ -173,7 +181,7 @@ export default {
     },
 
     async showError() {
-      const response = await this.$store.dispatch("wrongApiCall");
+      const response = await this.$store.dispatch('wrongApiCall');
       this.alertModalConfig(response);
     },
 

@@ -34,38 +34,39 @@
 </template>
 
 <script>
-import { throttleFunction } from "../utils/helper";
+import { throttleFunction } from '../utils/helper';
+
 export default {
-  name: "SearchAndFilter",
+  name: 'SearchAndFilter',
   data: () => ({
-    searchText: "",
+    searchText: '',
   }),
   computed: {
-    getSourceList: function () {
+    getSourceList() {
       return this.$store.state.sourceList;
     },
   },
   beforeMount() {
-    this.$store.dispatch("fetchSourceList");
+    this.$store.dispatch('fetchSourceList');
   },
 
   methods: {
     headlineSearch() {
-      if (this.searchText !== "") {
+      if (this.searchText !== '') {
         throttleFunction(this.callSearchApi, 600);
       }
     },
     callSearchApi() {
-      this.$store.dispatch("fetchSearchedHeadline", this.searchText);
+      this.$store.dispatch('fetchSearchedHeadline', this.searchText);
     },
     clearHeadlineSearch() {
-      this.$store.dispatch("fetchHeadlineList");
+      this.$store.dispatch('fetchHeadlineList');
     },
     filterList(source) {
-      this.$store.commit("setFilterSource", source.id);
+      this.$store.commit('setFilterSource', source.id);
     },
     resetFilter() {
-      this.$store.commit("setFilterSource", null);
+      this.$store.commit('setFilterSource', null);
     },
   },
 };

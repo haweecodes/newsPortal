@@ -24,15 +24,15 @@
 
 <script>
 export default {
-  name: "Detail",
+  name: 'Detail',
   computed: {
-    getHeadlineDetail: function () {
+    getHeadlineDetail() {
       return this.$store.state.headlineDetail;
     },
   },
   methods: {
     returnToHome() {
-      this.$router.push("/");
+      this.$router.push('/');
     },
   },
 };
