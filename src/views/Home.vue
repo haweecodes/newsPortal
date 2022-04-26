@@ -1,6 +1,6 @@
 <template>
-  <section>
-    <v-container fluid>
+  <section class="h-100">
+    <v-container fluid class="h-100">
       <SearchAndFilter />
 
       <HeadlineEditModal

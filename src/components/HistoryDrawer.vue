@@ -8,7 +8,7 @@
 
     <v-divider></v-divider>
 
-    <v-list dense>
+    <v-list dense v-if="historyList.length > 0">
       <v-list-item v-for="history in historyList" :key="`${history.time}`">
         <v-list-item-content>
           <v-list-item-subtitle>{{
@@ -18,6 +18,7 @@
         </v-list-item-content>
       </v-list-item>
     </v-list>
+    <p v-else>No history to show</p>
   </v-navigation-drawer>
 </template>
 

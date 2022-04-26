@@ -2,7 +2,7 @@
   <section v-if="!loading">
     <slot name="content" />
   </section>
-  <section v-else class="d-flex justify-center align-center">
+  <section v-else class="d-flex justify-center align-center" >
     <v-progress-circular
       :size="70"
       :width="7"
