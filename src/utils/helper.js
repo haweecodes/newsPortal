@@ -1,8 +1,8 @@
-const isSingleParamURL = (url) => (url.includes('?') ? '&' : '?');
+const attachOrExtendParam = (url) => (url.includes('?') ? '&' : '?');
 
-const addApiKeyToUrl = (url) => `${url}${isSingleParamURL(url)}apiKey=${process.env.VUE_APP_NEWSAPI_API_KEY}`;
+const addApiKeyToUrl = (url, apiKey) => `${url}${attachOrExtendParam(url)}apiKey=${apiKey}`;
 
-const insertParamToUrl = (url, searchParam) => `${url}${isSingleParamURL(url)}${searchParam}`;
+const insertParamToUrl = (url, searchParam) => `${url}${attachOrExtendParam(url)}${searchParam}`;
 
 let throttlePause;
 const throttleFunction = (callback, delay) => {
@@ -28,8 +28,8 @@ const setHistoryToLocalStorage = (headline) => {
 const getHistoryFromLocalStorage = () => JSON.parse(localStorage.getItem('headlineStorageList')) || [];
 
 export {
+  attachOrExtendParam,
   addApiKeyToUrl,
-  isSingleParamURL,
   insertParamToUrl,
   throttleFunction,
   setHistoryToLocalStorage,

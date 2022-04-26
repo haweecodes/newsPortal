@@ -20,7 +20,7 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use((config) => {
   const customConfig = config;
-  customConfig.url = `${addApiKeyToUrl(config.url)}`;
+  customConfig.url = `${addApiKeyToUrl(config.url, process.env.VUE_APP_NEWSAPI_API_KEY)}`;
   return customConfig;
 }, (error) => Promise.reject(error));
 
