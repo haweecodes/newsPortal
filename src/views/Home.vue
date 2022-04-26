@@ -5,7 +5,7 @@
 
       <HeadlineEditModal
         v-if="showModal"
-        :open="showModal"
+        v-model="showModal"
         @onHeadlineChange="onHeadlineChange"
         @onModalClose="toogleModal"
       />
@@ -66,7 +66,7 @@
         </template>
       </LoaderWrapper>
 
-      <HistoryDrawer v-if="drawer" :drawer="drawer" />
+      <HistoryDrawer v-if="drawer" v-model="drawer" />
 
       <v-speed-dial
         fixed

@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="open" width="500">
+  <v-dialog v-model="show" width="500">
     <v-card>
       <v-card-title>Edit headline title</v-card-title>
       <v-card-text class="mt-2">
@@ -7,7 +7,7 @@
           v-model="newHeadlineTitle"
           label="New headline title"
           :rules="[
-            () => !!newHeadlineTitle || 'This field is required',
+            () => newHeadlineTitle.length === 0 || 'This field is required',
             () =>
               (!!newHeadlineTitle && newHeadlineTitle.length < 256) ||
               'Headline must be less than 255 characters',
@@ -38,7 +38,11 @@
 <script>
 export default {
   name: 'HeadlineEditModal',
-  props: ['open', 'onHeadlineChange', 'onModalClose'],
+  model: {
+    prop: 'showModal',
+    event: 'change',
+  },
+  props: ['showModal', 'onHeadlineChange', 'onModalClose'],
   data: () => ({
     newHeadlineTitle: '',
   }),
@@ -46,9 +50,18 @@ export default {
     checkHeadlineLength() {
       return this.newHeadlineTitle.length > 255;
     },
+    show: {
+      get() {
+        return this.showModal;
+      },
+      set(value) {
+        this.$emit('change', value);
+      },
+    },
   },
   methods: {
     editHeadlineTitle() {
+      if (this.newHeadlineTitle.length < 1) return;
       this.$emit('onHeadlineChange', this.newHeadlineTitle);
     },
     closeModal() {

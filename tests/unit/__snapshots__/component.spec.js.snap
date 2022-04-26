@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test HeadlineEditModal test HeadlineEditModal mount 1`] = `
+<v-dialog-stub contentclass="" opendelay="0" closedelay="0" openonclick="true" origin="center center" retainfocus="true" transition="dialog-transition" width="500">
+  <v-card-stub loaderheight="4" tag="div">
+    <v-card-title-stub tag="div">Edit headline title</v-card-title-stub>
+    <v-card-text-stub tag="div" class="mt-2">
+      <v-text-field-stub errorcount="1" errormessages="" messages="" rules="[Function],[Function]" successmessages="" value="" backgroundcolor="" label="New headline title" loaderheight="2" clearicon="$clear" counter="255" outlined="true" type="text"></v-text-field-stub>
+    </v-card-text-stub>
+    <v-card-actions-stub tag="div">
+      <v-spacer-stub tag="div"></v-spacer-stub>
+      <v-btn-stub color="red darken-1" tag="button" activeclass="" text="true" type="button"> Cancel </v-btn-stub>
+      <v-btn-stub color="green darken-1" tag="button" activeclass="" text="true" type="button">
+        Confirm
+      </v-btn-stub>
+    </v-card-actions-stub>
+  </v-card-stub>
+</v-dialog-stub>
+`;
+
+exports[`test HistoryDrawer test HistoryDrawer mount 1`] = `
+<v-navigation-drawer-stub absolute="true" mobilebreakpoint="1264" height="100%" minivariantwidth="56" src="" tag="aside" temporary="true" width="256">
+  <v-list-item-stub activeclass="" tag="div">
+    <v-list-item-content-stub tag="div">
+      <v-list-item-title-stub tag="div">History</v-list-item-title-stub>
+    </v-list-item-content-stub>
+  </v-list-item-stub>
+  <v-divider-stub></v-divider-stub>
+  <p>No history to show</p>
+</v-navigation-drawer-stub>
+`;
