@@ -5,6 +5,7 @@ import {
   // throttleFunction,
   setHistoryToLocalStorage,
   getHistoryFromLocalStorage,
+  formatDate,
 } from '../../src/utils/helper';
 
 import {
@@ -58,6 +59,12 @@ describe('test url functions', () => {
 
     it('get local storage', () => {
       expect(getHistoryFromLocalStorage()[0]).toHaveProperty('title', 'url', 'time');
+    });
+  });
+
+  describe('test date transform', () => {
+    it('show correct date format', () => {
+      expect(formatDate('2022-04-27T18:31:51.226Z')).toEqual('2022-04-28');
     });
   });
 });

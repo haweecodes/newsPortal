@@ -1,13 +1,14 @@
 import Vue from 'vue';
-import moment from 'moment';
 import App from './App.vue';
 import router from './router';
 import vuetify from './plugins/vuetify';
 import store from './store';
 
+import { formatDate } from './utils/helper';
+
 Vue.config.productionTip = false;
 
-Vue.filter('transformDate', (date) => moment(date).format('YYYY-MM-DD'));
+Vue.filter('transformDate', formatDate);
 
 new Vue({
   router,

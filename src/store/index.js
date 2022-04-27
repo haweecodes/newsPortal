@@ -24,85 +24,91 @@ axiosInstance.interceptors.request.use((config) => {
   return customConfig;
 }, (error) => Promise.reject(error));
 
-export default new Vuex.Store({
-  state: {
-    loading: false,
-    newsHeadlineList: [],
-    sourceList: [],
-    sourceFilter: null,
-    totalHeadlineCount: 0,
-    headlineDetail: {},
-  },
-  mutations: {
-    setHeadlineList(state, headlinePayload) {
-      state.newsHeadlineList = [...headlinePayload.articles];
-      state.totalHeadlineCount = headlinePayload.totalResults;
-    },
-    setSourceList(state, sourcePayload) {
-      state.sourceList = [...sourcePayload.sources];
-    },
-    setFilterSource(state, sourceFilter) {
-      state.sourceFilter = sourceFilter;
-    },
-    setViewHeadlineDetail(state, headline) {
-      Object.assign(state.headlineDetail, headline);
-    },
-    editViewHeadline(state, {
-      title,
-      index,
-    }) {
-      const tempList = [...state.newsHeadlineList];
-      const headline = tempList[index];
-      headline.title = title;
+export const state = {
+  loading: false,
+  newsHeadlineList: [],
+  sourceList: [],
+  sourceFilter: null,
+  totalHeadlineCount: 0,
+  headlineDetail: {},
+};
 
-      tempList.splice(index, 1, headline);
-      state.newsHeadlineList = [...tempList];
-    },
-    setLoadingState(state, loadingState) {
-      state.loading = loadingState;
-    },
+export const mutations = {
+  setHeadlineList(state, headlinePayload) {
+    state.newsHeadlineList = [...headlinePayload.articles];
+    state.totalHeadlineCount = headlinePayload.totalResults;
   },
-  actions: {
-    async fetchHeadlineList(context) {
-      try {
-        await axiosInstance.get(headlineApi).then((response) => {
-          context.commit('setHeadlineList', response.data);
-          context.commit('setLoadingState', false);
-        });
-      } catch (error) {
-        console.error(error);
+  setSourceList(state, sourcePayload) {
+    state.sourceList = [...sourcePayload.sources];
+  },
+  setFilterSource(state, sourceFilter) {
+    state.sourceFilter = sourceFilter;
+  },
+  setViewHeadlineDetail(state, headline) {
+    Object.assign(state.headlineDetail, headline);
+  },
+  editViewHeadline(state, {
+    title,
+    index,
+  }) {
+    const tempList = [...state.newsHeadlineList];
+    const headline = tempList[index];
+    headline.title = title;
+
+    tempList.splice(index, 1, headline);
+    state.newsHeadlineList = [...tempList];
+  },
+  setLoadingState(state, loadingState) {
+    state.loading = loadingState;
+  },
+};
+
+export const actions = {
+  async fetchHeadlineList(context) {
+    try {
+      await axiosInstance.get(headlineApi).then((response) => {
+        context.commit('setHeadlineList', response.data);
         context.commit('setLoadingState', false);
-      }
-    },
-    async fetchSourceList(context) {
-      try {
-        await axiosInstance.get(sourceApi).then((response) => {
-          context.commit('setSourceList', response.data);
-          console.log(response);
-        });
-      } catch (error) {
-        console.error(error);
-      }
-    },
-    async fetchSearchedHeadline(context, payload) {
-      try {
-        await axiosInstance.get(insertParamToUrl(headlineApi, `q=${payload}`)).then((response) => {
-          context.commit('setHeadlineList', response.data);
-          console.log(response);
-        });
-      } catch (error) {
-        console.error(error);
-      }
-    },
-    async wrongApiCall() {
-      try {
-        return await axiosInstance.get(`${sourceApi}/s/`);
-      } catch (error) {
-        return new Error(
-          'Error! Please check your request',
-        );
-      }
-    },
+      });
+    } catch (error) {
+      console.error(error);
+      context.commit('setLoadingState', false);
+    }
   },
+  async fetchSourceList(context) {
+    try {
+      await axiosInstance.get(sourceApi).then((response) => {
+        context.commit('setSourceList', response.data);
+        console.log(response);
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  },
+  async fetchSearchedHeadline(context, payload) {
+    try {
+      await axiosInstance.get(insertParamToUrl(headlineApi, `q=${payload}`)).then((response) => {
+        context.commit('setHeadlineList', response.data);
+        console.log(response);
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  },
+  async wrongApiCall() {
+    try {
+      return await axiosInstance.get(`${sourceApi}/s/`);
+    } catch (error) {
+      return new Error(
+        'Error! Please check your request',
+      );
+    }
+  },
+};
+
+export default new Vuex.Store({
+  state,
+  mutations,
+  actions,
   modules: {},
 });

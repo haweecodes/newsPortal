@@ -29,3 +29,19 @@ exports[`test HistoryDrawer test HistoryDrawer mount 1`] = `
   <p>No history to show</p>
 </v-navigation-drawer-stub>
 `;
+
+exports[`test LoaderWrapper test LoaderWrapper mount 1`] = `<section></section>`;
+
+exports[`test SearchAndFilter test SearchAndFilter mount 1`] = `
+<v-row-stub tag="div" wrap="" class="ma-2">
+  <v-col-stub sm="8" md="4" offsetsm="0" offsetmd="6" tag="div" xs="12">
+    <v-text-field-stub errorcount="1" errormessages="" messages="" rules="" successmessages="" value="" backgroundcolor="" hidedetails="true" loaderheight="2" clearable="true" clearicon="$clear" outlined="true" placeholder="Press enter to search..." type="text"></v-text-field-stub>
+  </v-col-stub>
+  <v-col-stub sm="4" md="2" tag="div" xs="12" class="d-flex justify-end align-center">
+    <v-menu-stub opendelay="0" closedelay="0" openonclick="true" contentclass="" maxwidth="auto" nudgebottom="0" nudgeleft="0" nudgeright="0" nudgetop="0" nudgewidth="0" closeonclick="true" closeoncontentclick="true" maxheight="400" offsety="true" origin="top left" transition="v-menu-transition">
+      <v-list-stub tag="div"></v-list-stub>
+    </v-menu-stub>
+    <v-btn-stub width="auto" tag="button" activeclass="" type="button" class="ml-2">Reset</v-btn-stub>
+  </v-col-stub>
+</v-row-stub>
+`;

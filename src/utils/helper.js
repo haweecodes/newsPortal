@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 const attachOrExtendParam = (url) => (url.includes('?') ? '&' : '?');
 
 const addApiKeyToUrl = (url, apiKey) => `${url}${attachOrExtendParam(url)}apiKey=${apiKey}`;
@@ -25,7 +27,10 @@ const setHistoryToLocalStorage = (headline) => {
   localStorage.setItem('headlineStorageList', JSON.stringify(history));
 };
 
-const getHistoryFromLocalStorage = () => JSON.parse(localStorage.getItem('headlineStorageList')) || [];
+const getHistoryFromLocalStorage = () => JSON.parse(localStorage.getItem('headlineStorageList')) ||
+  [];
+
+const formatDate = (date) => moment(date).format('YYYY-MM-DD');
 
 export {
   attachOrExtendParam,
@@ -34,4 +39,5 @@ export {
   throttleFunction,
   setHistoryToLocalStorage,
   getHistoryFromLocalStorage,
+  formatDate,
 };

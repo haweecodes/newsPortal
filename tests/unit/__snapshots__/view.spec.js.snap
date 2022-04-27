@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test Detail test Detail mount 1`] = `
+<article>
+  <v-btn-stub tag="button" activeclass="" icon="true" type="button">
+    <v-icon-stub>mdi-arrow-left</v-icon-stub>
+  </v-btn-stub>
+  <h1 class="text-center ma-5"></h1>
+  <p class="text-center ma-5"><strong>Written By:</strong></p>
+  <p class="text-center ma-5"><strong>Published At: 2022-04-28</strong></p>
+  <v-img-stub aspectratio="3" contain="true" options="[object Object]" position="center center" src="" transition="fade-transition"></v-img-stub>
+  <p class="ma-5"></p>
+</article>
+`;
+
+exports[`test Home test Home mount 1`] = `
+<section class="h-100">
+  <v-container-stub tag="div" fluid="true" class="h-100">
+    <searchandfilter-stub></searchandfilter-stub>
+    <!---->
+    <loaderwrapper-stub loading="true"></loaderwrapper-stub>
+    <!---->
+    <v-speed-dial-stub bottom="true" fixed="true" right="true" transition="slide-y-reverse-transition" direction="top" openonhover="true">
+      <v-btn-stub color="indigo" dark="true" tag="button" activeclass="" small="true" fab="true" type="button">
+        <v-icon-stub>mdi-history</v-icon-stub>
+      </v-btn-stub>
+      <v-btn-stub color="red" dark="true" tag="button" activeclass="" small="true" fab="true" type="button"> 404 </v-btn-stub>
+    </v-speed-dial-stub>
+    <v-snackbar-stub color="red accent-2" tile="true" tag="div" value="" absolute="true" right="true" top="true" centered="true" contentclass="" timeout="-1" transition="v-snack-transition">
+
+
+    </v-snackbar-stub>
+  </v-container-stub>
+</section>
+`;
