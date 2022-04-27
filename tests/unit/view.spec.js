@@ -14,7 +14,7 @@ import {
 } from '../../src/store/index';
 
 import {
-  formatDate
+  formatDate,
 } from '../../src/utils/helper';
 
 const vuetify = new Vuetify();
