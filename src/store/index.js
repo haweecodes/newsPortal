@@ -70,7 +70,6 @@ const actions = {
         context.commit('setLoadingState', false);
       });
     } catch (error) {
-      console.error(error);
       context.commit('setLoadingState', false);
     }
   },
@@ -78,10 +77,9 @@ const actions = {
     try {
       await axiosInstance.get(sourceApi).then((response) => {
         context.commit('setSourceList', response.data);
-        console.log(response);
       });
     } catch (error) {
-      console.error(error);
+      //
     }
   },
   async fetchSearchedHeadline(context, payload) {
@@ -89,10 +87,9 @@ const actions = {
       await axiosInstance.get(insertParamToUrl(headlineApi, `q=${payload}`))
         .then((response) => {
           context.commit('setHeadlineList', response.data);
-          console.log(response);
         });
     } catch (error) {
-      console.error(error);
+      //
     }
   },
   async wrongApiCall() {

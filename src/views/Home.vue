@@ -176,12 +176,10 @@ export default {
     toogleFunction(toggle) {
       this[toggle] = !this[toggle];
     },
-
     async showError() {
       const response = await this.$store.dispatch('wrongApiCall');
       this.alertModalConfig(response);
     },
-
     alertModalConfig(message) {
       this.showAlert = true;
       this.errorMessage = message;
@@ -190,7 +188,6 @@ export default {
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .link {
   cursor: pointer;

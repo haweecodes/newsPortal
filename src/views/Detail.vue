@@ -1,5 +1,5 @@
 <template>
-  <article>
+  <article v-once>
     <v-btn @click="returnToHome" icon>
       <v-icon>mdi-arrow-left</v-icon>
     </v-btn>
@@ -38,6 +38,5 @@ export default {
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 </style>

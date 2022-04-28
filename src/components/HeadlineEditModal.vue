@@ -1,11 +1,11 @@
 <template>
   <v-dialog v-model="show" width="500">
     <v-card>
-      <v-card-title>Edit headline title</v-card-title>
+      <v-card-title>Edit headline</v-card-title>
       <v-card-text class="mt-2">
         <v-text-field
           v-model="newHeadlineTitle"
-          label="New headline title"
+          label="New headline"
           :rules="[
             () => newHeadlineTitle.length > 0 || 'This field is required',
             () => newHeadlineTitle.length < 256 || 'Headline must be less than 255 characters',
@@ -68,5 +68,3 @@ export default {
   },
 };
 </script>
-
-<style></style>

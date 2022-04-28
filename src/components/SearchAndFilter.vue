@@ -22,13 +22,13 @@
           <v-list-item
             v-for="source in getSourceList"
             :key="source.id"
-            @click="filterList(source)"
+            @click.stop="setFilterSource(source.id)"
           >
             <v-list-item-title>{{ source.name }}</v-list-item-title>
           </v-list-item>
         </v-list>
       </v-menu>
-      <v-btn width="auto" class="ml-2" @click="resetFilter">Reset</v-btn>
+      <v-btn width="auto" class="ml-2" @click.stop="setFilterSource(null)">Reset</v-btn>
     </v-col>
   </v-row>
 </template>
@@ -52,7 +52,7 @@ export default {
 
   methods: {
     headlineSearch() {
-      if (this.searchText !== '') {
+      if (this.searchText !== '' && this.searchText !== null) {
         throttleFunction(this.callSearchApi, 600);
       }
     },
@@ -62,11 +62,8 @@ export default {
     clearHeadlineSearch() {
       this.$store.dispatch('fetchHeadlineList');
     },
-    filterList(source) {
-      this.$store.commit('setFilterSource', source.id);
-    },
-    resetFilter() {
-      this.$store.commit('setFilterSource', null);
+    setFilterSource(value) {
+      this.$store.commit('setFilterSource', value);
     },
   },
 };
