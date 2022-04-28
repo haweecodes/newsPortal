@@ -24,7 +24,7 @@ axiosInstance.interceptors.request.use((config) => {
   return customConfig;
 }, (error) => Promise.reject(error));
 
-export const state = {
+const state = {
   loading: false,
   newsHeadlineList: [],
   sourceList: [],
@@ -32,22 +32,21 @@ export const state = {
   totalHeadlineCount: 0,
   headlineDetail: {},
 };
-
-export const mutations = {
-  setHeadlineList(state, headlinePayload) {
+const mutations = {
+  setHeadlineList(context, headlinePayload) {
     state.newsHeadlineList = [...headlinePayload.articles];
     state.totalHeadlineCount = headlinePayload.totalResults;
   },
-  setSourceList(state, sourcePayload) {
+  setSourceList(context, sourcePayload) {
     state.sourceList = [...sourcePayload.sources];
   },
-  setFilterSource(state, sourceFilter) {
+  setFilterSource(context, sourceFilter) {
     state.sourceFilter = sourceFilter;
   },
-  setViewHeadlineDetail(state, headline) {
+  setViewHeadlineDetail(context, headline) {
     Object.assign(state.headlineDetail, headline);
   },
-  editViewHeadline(state, {
+  editViewHeadline(context, {
     title,
     index,
   }) {
@@ -58,12 +57,12 @@ export const mutations = {
     tempList.splice(index, 1, headline);
     state.newsHeadlineList = [...tempList];
   },
-  setLoadingState(state, loadingState) {
+  setLoadingState(context, loadingState) {
     state.loading = loadingState;
   },
 };
 
-export const actions = {
+const actions = {
   async fetchHeadlineList(context) {
     try {
       await axiosInstance.get(headlineApi).then((response) => {
@@ -87,10 +86,11 @@ export const actions = {
   },
   async fetchSearchedHeadline(context, payload) {
     try {
-      await axiosInstance.get(insertParamToUrl(headlineApi, `q=${payload}`)).then((response) => {
-        context.commit('setHeadlineList', response.data);
-        console.log(response);
-      });
+      await axiosInstance.get(insertParamToUrl(headlineApi, `q=${payload}`))
+        .then((response) => {
+          context.commit('setHeadlineList', response.data);
+          console.log(response);
+        });
     } catch (error) {
       console.error(error);
     }
@@ -112,3 +112,9 @@ export default new Vuex.Store({
   actions,
   modules: {},
 });
+
+export {
+  state,
+  mutations,
+  actions,
+};

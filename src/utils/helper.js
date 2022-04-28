@@ -27,8 +27,7 @@ const setHistoryToLocalStorage = (headline) => {
   localStorage.setItem('headlineStorageList', JSON.stringify(history));
 };
 
-const getHistoryFromLocalStorage = () => JSON.parse(localStorage.getItem('headlineStorageList')) ||
-  [];
+const getHistoryFromLocalStorage = () => JSON.parse(localStorage.getItem('headlineStorageList')) || [];
 
 const formatDate = (date) => moment(date).format('YYYY-MM-DD');
 

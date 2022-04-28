@@ -7,10 +7,8 @@
           v-model="newHeadlineTitle"
           label="New headline title"
           :rules="[
-            () => newHeadlineTitle.length === 0 || 'This field is required',
-            () =>
-              (!!newHeadlineTitle && newHeadlineTitle.length < 256) ||
-              'Headline must be less than 255 characters',
+            () => newHeadlineTitle.length > 0 || 'This field is required',
+            () => newHeadlineTitle.length < 256 || 'Headline must be less than 255 characters',
           ]"
           counter="255"
           outlined
@@ -48,7 +46,7 @@ export default {
   }),
   computed: {
     checkHeadlineLength() {
-      return this.newHeadlineTitle.length > 255;
+      return this.newHeadlineTitle.length > 255 || this.newHeadlineTitle.length < 1;
     },
     show: {
       get() {
