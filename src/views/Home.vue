@@ -7,7 +7,7 @@
         v-if="showModal"
         v-model="showModal"
         @onHeadlineChange="onHeadlineChange"
-        @onModalClose="toogleModal"
+        @onModalClose="toogleFunction('showModal')"
       />
 
       <LoaderWrapper :loading="getLoadingState">
@@ -80,7 +80,7 @@
             <v-icon> mdi-apps </v-icon>
           </v-btn>
         </template>
-        <v-btn fab dark small color="indigo" @click.stop="toggleDrawer">
+        <v-btn fab dark small color="indigo" @click.stop="toogleFunction('drawer')">
           <v-icon>mdi-history</v-icon>
         </v-btn>
         <v-btn fab dark small color="red" @click="showError"> 404 </v-btn>
@@ -108,21 +108,17 @@
 </template>
 
 <script>
-import HeadlineBox from '@/components/HeadlineBox.vue';
-import SearchAndFilter from '@/components/SearchAndFilter.vue';
-import HeadlineEditModal from '@/components/HeadlineEditModal.vue';
-import LoaderWrapper from '@/components/LoaderWrapper.vue';
-import HistoryDrawer from '@/components/HistoryDrawer.vue';
+
 import { setHistoryToLocalStorage } from '@/utils/helper';
 
 export default {
   name: 'Home',
   components: {
-    HeadlineBox,
-    SearchAndFilter,
-    HeadlineEditModal,
-    LoaderWrapper,
-    HistoryDrawer,
+    HeadlineBox: () => import(/* webpackPrefetch: true */'@/components/HeadlineBox.vue'),
+    SearchAndFilter: () => import(/* webpackPrefetch: true */'@/components/SearchAndFilter.vue'),
+    HeadlineEditModal: () => import(/* webpackPrefetch: true */ '@/components/HeadlineEditModal.vue'),
+    LoaderWrapper: () => import(/* webpackPrefetch: true */'@/components/LoaderWrapper.vue'),
+    HistoryDrawer: () => import(/* webpackPrefetch: true */'@/components/HistoryDrawer.vue'),
   },
   data: () => ({
     loading: true,
@@ -167,17 +163,18 @@ export default {
     editHeadline(headline, index) {
       this.editableHeadlineIndex = index;
       this.currentHeadline = headline.title;
-      this.toogleModal();
+      this.toogleFunction('showModal');
     },
     async onHeadlineChange(title) {
       this.$store.commit('editViewHeadline', {
         title,
         index: this.editableHeadlineIndex,
       });
-      this.toogleModal();
+      this.toogleFunction('showModal');
     },
-    toogleModal() {
-      this.showModal = !this.showModal;
+
+    toogleFunction(toggle) {
+      this[toggle] = !this[toggle];
     },
 
     async showError() {
@@ -188,9 +185,6 @@ export default {
     alertModalConfig(message) {
       this.showAlert = true;
       this.errorMessage = message;
-    },
-    toggleDrawer() {
-      this.drawer = !this.drawer;
     },
   },
 };
