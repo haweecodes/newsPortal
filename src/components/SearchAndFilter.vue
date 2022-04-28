@@ -12,23 +12,16 @@
       ></v-text-field
     ></v-col>
     <v-col md="2" sm="4" xs="12" class="d-flex justify-end align-center">
-      <v-menu offset-y max-height="400">
-        <template v-slot:activator="{ on, attrs }">
-          <v-btn width="auto" color="primary" dark v-bind="attrs" v-on="on">
-            Filter
-          </v-btn>
-        </template>
-        <v-list>
-          <v-list-item
-            v-for="source in getSourceList"
-            :key="source.id"
-            @click.stop="setFilterSource(source.id)"
-          >
-            <v-list-item-title>{{ source.name }}</v-list-item-title>
-          </v-list-item>
-        </v-list>
-      </v-menu>
-      <v-btn width="auto" class="ml-2" @click.stop="setFilterSource(null)">Reset</v-btn>
+      <v-select
+        return-object
+        outlined
+        hide-details
+        clearable
+        :items="getSourceList"
+        item-text="name"
+        placeholder="Search by source"
+        @change="setFilterSource"
+      ></v-select>
     </v-col>
   </v-row>
 </template>
@@ -63,7 +56,7 @@ export default {
       this.$store.dispatch('fetchHeadlineList');
     },
     setFilterSource(value) {
-      this.$store.commit('setFilterSource', value);
+      this.$store.commit('setFilterSource', (value && value.id) || null);
     },
   },
 };
